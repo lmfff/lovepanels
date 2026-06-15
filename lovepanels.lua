@@ -29,64 +29,28 @@ lovepanels.process = function(panels)
         else
             if node.parent.attributes.direction == "horizontal" then
                 if not node.prev_sibling then
-                    node.x = node.parent.x +
-                        (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
-                    if not node.next_sibling then
-                        node.w = (
-                            node.parent.w
-                            * (tonumber(node.attributes.ratio) / node.parent.total_children_ratio)
-                            - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01) * 2
-                        )
-                    else
-                        node.w = (
-                            node.parent.w
-                            * (tonumber(node.attributes.ratio) / node.parent.total_children_ratio)
-                            - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
-                        )
-                    end
+                    node.x = node.parent.x + (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
                 else
                     node.x = node.prev_sibling.x + node.prev_sibling.w
-                    node.w = (
-                        node.parent.w
-                        * (tonumber(node.attributes.ratio) / node.parent.total_children_ratio)
-                        - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
-                    )
                 end
-                node.y = node.parent.y + (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
-                node.h = (
-                    node.parent.h
-                    - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01) * 2
+                node.w = (
+                    (node.parent.w - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01) * 2)
+                    * (node.attributes.ratio / node.parent.total_children_ratio)
                 )
+                node.y = node.parent.y + (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
+                node.h = node.parent.h - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01) * 2
             elseif node.parent.attributes.direction == "vertical" then
                 if not node.prev_sibling then
-                    node.y = node.parent.y +
-                        (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
-                    if not node.next_sibling then
-                        node.h = (
-                            node.parent.h
-                            * (tonumber(node.attributes.ratio) / node.parent.total_children_ratio)
-                            - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01) * 2
-                        )
-                    else
-                        node.h = (
-                            node.parent.h
-                            * (tonumber(node.attributes.ratio) / node.parent.total_children_ratio)
-                            - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
-                        )
-                    end
+                    node.y = node.parent.y + (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
                 else
                     node.y = node.prev_sibling.y + node.prev_sibling.h
-                    node.h = (
-                        node.parent.h
-                        * (tonumber(node.attributes.ratio) / node.parent.total_children_ratio)
-                        - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
-                    )
                 end
-                node.x = node.parent.x + (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
-                node.w = (
-                    node.parent.w
-                    - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01) * 2
+                node.h = (
+                    (node.parent.h - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01) * 2)
+                    * (node.attributes.ratio / node.parent.total_children_ratio)
                 )
+                node.x = node.parent.x + (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01)
+                node.w = node.parent.w - (math.min(root.w, root.h) * node.parent.attributes.padding * 0.01) * 2
             end
         end
 
